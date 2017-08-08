@@ -1,5 +1,5 @@
 <dashboard>
-  <label>Contrast Security</label>
+  <label>Summary</label>
   <row>
     <panel>
       <title>Attacks Blocked</title>
