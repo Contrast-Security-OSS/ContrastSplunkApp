@@ -1,13 +1,16 @@
 <!-- Original color: #65A637 -->
 <nav search_view="search" color="#444444">
-  <view name="search" />
-  <view name="datasets" />
-  <view name="reports" />
   <view name="alerts" />
+  <collection label="Reports">
+    <a href="reports">All</a>
+    <saved source="all" match="Contrast Events" view="search" />
+  </collection>
+  <!--<view name="search" />-->
+  <a href="search?q=sourcetype='contrast_events'">Search</a>
   <view name="contrast_security" default="true" />
   <collection label="Help">
-    <a href="https://docs.contrastsecurity.com">Documentation</a>
     <a href="https://support.contrastsecurity.com">Customer Support</a>
-    <a href="https://www.contrastsecurity.com">Contrast Security</a>
+    <a href="https://docs.contrastsecurity.com">Documentation</a>
+    <a href="https://www.contrastsecurity.com">Website</a>
   </collection>
 </nav>

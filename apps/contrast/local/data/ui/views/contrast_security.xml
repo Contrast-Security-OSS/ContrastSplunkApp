@@ -1,13 +1,23 @@
-<dashboard>
+<form>
   <label>Summary</label>
+  <description>Attack summary on applications protected by Contrast Security.</description>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="period" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
   <row>
     <panel>
       <title>Attacks Blocked</title>
       <chart>
         <search>
           <query>sourcetype="contrast_events"  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
-          <earliest>0</earliest>
-          <latest></latest>
+          <earliest>$period.earliest$</earliest>
+          <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -38,7 +48,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="_blank">search?q=sourcetype="contrast_events"  outcome=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  outcome=$click.value$&amp;earliest=0&amp;latest=</link>
         </drilldown>
       </chart>
     </panel>
@@ -47,8 +57,8 @@
       <chart>
         <search>
           <query>sourcetype="contrast_events"  | rename app as "Application" | stats count by "Application"</query>
-          <earliest>0</earliest>
-          <latest></latest>
+          <earliest>$period.earliest$</earliest>
+          <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="charting.chart">pie</option>
@@ -56,7 +66,7 @@
         <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <drilldown>
-          <link target="_blank">search?q=sourcetype="contrast_events"  app=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  app=$click.value$&amp;earliest=0&amp;latest=</link>
         </drilldown>
       </chart>
     </panel>
@@ -67,8 +77,8 @@
       <chart>
         <search>
           <query>sourcetype="contrast_events"  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
-          <earliest>0</earliest>
-          <latest></latest>
+          <earliest>$period.earliest$</earliest>
+          <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -99,9 +109,9 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="_blank">search?q=sourcetype="contrast_events"  pri=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  pri=$click.value$&amp;earliest=0&amp;latest=</link>
         </drilldown>
       </chart>
     </panel>
   </row>
-</dashboard>
+</form>
