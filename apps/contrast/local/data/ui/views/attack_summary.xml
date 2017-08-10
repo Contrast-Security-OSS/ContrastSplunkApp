@@ -48,7 +48,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  outcome=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  outcome=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -66,7 +66,7 @@
         <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  app=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  app=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -109,7 +109,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  pri=$click.value$&amp;earliest=0&amp;latest=</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>

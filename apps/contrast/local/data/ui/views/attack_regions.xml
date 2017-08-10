@@ -20,7 +20,7 @@
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="drilldown">none</option>
+        <option name="drilldown">all</option>
         <option name="mapping.choroplethLayer.colorBins">5</option>
         <option name="mapping.choroplethLayer.colorMode">auto</option>
         <option name="mapping.choroplethLayer.maximumColor">0xDB5800</option>
@@ -45,6 +45,9 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=sourcetype="contrast_events" | iplocation src | where (lat&gt;=$click.bounds.south$ AND lat&lt;$click.bounds.north$) AND (lon&gt;=$click.bounds.west$ AND lon&lt;$click.bounds.east$)&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+        </drilldown>
       </map>
     </panel>
   </row>
