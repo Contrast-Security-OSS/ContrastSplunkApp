@@ -46,7 +46,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="_blank">search?q=sourcetype="contrast_events" | iplocation src | where (lat&gt;=$click.bounds.south$ AND lat&lt;$click.bounds.north$) AND (lon&gt;=$click.bounds.west$ AND lon&lt;$click.bounds.east$)&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=sourcetype="contrast_events" | iplocation src | where (lat&gt;=$click.bounds.south$ AND lat&lt;$click.bounds.north$) AND (lon&gt;=$click.bounds.west$ AND lon&lt;$click.bounds.east$)&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </map>
     </panel>
