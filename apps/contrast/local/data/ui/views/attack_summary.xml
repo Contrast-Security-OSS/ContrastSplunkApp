@@ -43,7 +43,7 @@
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
-        <option name="charting.seriesColors">[0xA5C63B,0xE22A22,0xEFEFEF]</option>
+        <option name="charting.seriesColors">[0xA5C63B,0xE22A22,0xCCCCCC]</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>

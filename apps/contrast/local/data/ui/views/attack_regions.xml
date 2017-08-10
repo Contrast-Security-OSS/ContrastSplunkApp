@@ -15,7 +15,7 @@
       <title>Attack Sources</title>
       <map>
         <search>
-          <query>sourcetype=access_* | iplocation clientip | geostats latfield=lat longfield=lon count as TOTAL</query>
+          <query>sourcetype="contrast_events" | iplocation src | geostats latfield=lat longfield=lon count as TOTAL</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>

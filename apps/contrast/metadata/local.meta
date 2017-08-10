@@ -10,3 +10,11 @@ modtime = 1501604134.206468000
 owner = admin
 version = 6.6.2
 modtime = 1502310845.982101000
+
+[views/attack_regions]
+version = 6.6.2
+modtime = 1502380439.031816000
+
+[views/attack_summary]
+version = 6.6.2
+modtime = 1502381299.264855000
