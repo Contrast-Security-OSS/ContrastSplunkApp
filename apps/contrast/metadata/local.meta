@@ -18,3 +18,10 @@ modtime = 1502389880.757420000
 [views/attack_summary]
 version = 6.6.2
 modtime = 1502382357.614480000
+
+[savedsearches/Contrast%20Events]
+access = read : [ * ]
+export = system
+owner = admin
+version = 6.6.2
+modtime = 1502397590.126260000

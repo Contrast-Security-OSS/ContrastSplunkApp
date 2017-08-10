@@ -9,7 +9,7 @@
     <a href="reports">All</a>
     <saved source="all" match="Contrast Events" view="search" />
   </collection>
-  <a href='search?q=sourcetype="contrast_events"'>Search</a>
+  <a href='search?q=eventtype="contrast_eventtype"'>Search</a>
   <collection label="Help">
     <a href="https://support.contrastsecurity.com">Customer Support</a>
     <a href="https://docs.contrastsecurity.com">Documentation</a>

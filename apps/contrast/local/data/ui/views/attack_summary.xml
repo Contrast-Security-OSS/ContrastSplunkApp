@@ -15,7 +15,7 @@
       <title>Attacks Blocked</title>
       <chart>
         <search>
-          <query>sourcetype="contrast_events"  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
+          <query>eventtype="contrast_eventtype"  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -48,7 +48,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  outcome=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  outcome=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -56,7 +56,7 @@
       <title>Attacks by Applications</title>
       <chart>
         <search>
-          <query>sourcetype="contrast_events"  | rename app as "Application" | stats count by "Application"</query>
+          <query>eventtype="contrast_eventtype"  | rename app as "Application" | stats count by "Application"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -66,7 +66,7 @@
         <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  app=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  app=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -76,7 +76,7 @@
       <title>Attacks by Type</title>
       <chart>
         <search>
-          <query>sourcetype="contrast_events"  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
+          <query>eventtype="contrast_eventtype"  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -109,7 +109,7 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
         <drilldown>
-          <link target="contrast_search">search?q=sourcetype="contrast_events"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
