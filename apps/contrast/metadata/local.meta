@@ -13,11 +13,11 @@ modtime = 1502310845.982101000
 
 [views/attack_regions]
 version = 6.6.2
-modtime = 1503496248.159016000
+modtime = 1503499143.838520000
 
 [views/attack_summary]
 version = 6.6.2
-modtime = 1503495983.665299000
+modtime = 1503499166.015246000
 
 [savedsearches/Contrast%20Events]
 access = read : [ * ]
