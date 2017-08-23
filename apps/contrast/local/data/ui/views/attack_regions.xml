@@ -1,6 +1,6 @@
 <form>
-  <label>Attack Regions</label>
-  <description>Attack distribution by region.</description>
+  <label>Attack Geographical Distribution</label>
+  <description>A geographical view of attack identified and defended by Contrast Protect</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
       <label></label>

@@ -1,6 +1,6 @@
 <form>
-  <label>Attack Summary</label>
-  <description>Attack summary on applications protected by Contrast Security.</description>
+  <label>Attack Dashboard</label>
+  <description>A summary of attacks identified and defended by Contrast Protect</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
       <label></label>
