@@ -3,6 +3,7 @@
   <view name="alerts" />
   <collection label="Dashboards">
     <view name="attack_summary" default="true" />
+    <view name="attack_application" />
     <view name="attack_regions" />
   </collection>
   <collection label="Reports">

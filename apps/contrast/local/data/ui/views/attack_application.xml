@@ -3,11 +3,26 @@
   <description>A summary of attacks identified and defended by Contrast Security</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
-      <label></label>
+      <label>Time range</label>
       <default>
         <earliest>-24h@h</earliest>
         <latest>now</latest>
       </default>
+    </input>
+    <input type="multiselect" token="app" searchWhenChanged="true">
+      <label>Application</label>
+      <fieldForLabel>app</fieldForLabel>
+      <fieldForValue>app</fieldForValue>
+      <search>
+        <query>eventtype="contrast_eventtype" | stats values by app</query>
+      </search>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>app="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
     </input>
   </fieldset>
   <row>
@@ -15,7 +30,7 @@
       <title>Attacks Blocked</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype"  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
+          <query>eventtype="contrast_eventtype" $app$  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -52,36 +67,13 @@
         </drilldown>
       </chart>
     </panel>
-    <panel>
-      <title>Attacks by Applications</title>
-      <chart>
-        <search>
-          <query>eventtype="contrast_eventtype"  | rename app as "Application" | stats count by "Application"</query>
-          <earliest>$period.earliest$</earliest>
-          <latest>$period.latest$</latest>
-          <sampleRatio>1</sampleRatio>
-        </search>
-        <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.visibility">visible</option>
-        <option name="charting.axisTitleY2.visibility">visible</option>
-        <option name="charting.chart">pie</option>
-        <option name="charting.chart.stackMode">stacked</option>
-        <option name="charting.drilldown">all</option>
-        <option name="charting.layout.splitSeries">0</option>
-        <option name="charting.legend.placement">right</option>
-        <option name="trellis.enabled">0</option>
-        <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  app=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
-        </drilldown>
-      </chart>
-    </panel>
   </row>
   <row>
     <panel>
       <title>Attacks by Type</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype"  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
+          <query>eventtype="contrast_eventtype" app=$app$  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -132,7 +124,7 @@
       </input>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype" pri=* | timechart count by pri | rename _time as "Time"</query>
+          <query>eventtype="contrast_eventtype" app=$app$ pri=* | timechart count by pri</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -151,7 +143,7 @@
       <title>Top 10 most attacked URIs</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype" | top 10 request | rename count as "Total"</query>
+          <query>eventtype="contrast_eventtype" app=$app$ | top 10 request</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
         </search>

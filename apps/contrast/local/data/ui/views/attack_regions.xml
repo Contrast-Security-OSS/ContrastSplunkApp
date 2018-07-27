@@ -3,11 +3,24 @@
   <description>A geographical view of attack identified and defended by Contrast Security</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
-      <label></label>
+      <label>Time range</label>
       <default>
         <earliest>-24h@h</earliest>
         <latest>now</latest>
       </default>
+    </input>
+    <input type="dropdown" token="outcome" searchWhenChanged="true">
+      <label>Attack outcome</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>outcome</fieldForLabel>
+      <fieldForValue>outcome</fieldForValue>
+      <search>
+        <query>eventtype="contrast_eventtype" | stats values by outcome</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
     </input>
   </fieldset>
   <row>
@@ -15,7 +28,7 @@
       <title>Attack Sources</title>
       <map>
         <search>
-          <query>eventtype="contrast_eventtype" | iplocation src | geostats latfield=lat longfield=lon count as TOTAL</query>
+          <query>eventtype="contrast_eventtype" outcome=$outcome$ | iplocation src by outcome | geostats latfield=lat longfield=lon count by outcome</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -42,6 +55,7 @@
         <option name="mapping.tileLayer.minZoom">0</option>
         <option name="mapping.tileLayer.tileOpacity">1</option>
         <option name="mapping.type">marker</option>
+        <option name="mapping.fieldColors">{"EXPLOITED":0xFF0000,"INEFFECTIVE":0xAEAEAE}</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
