@@ -3,7 +3,7 @@
   <description>A summary of attacks identified and defended by Contrast Security</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
-      <label></label>
+      <label>Time range</label>
       <default>
         <earliest>-24h@h</earliest>
         <latest>now</latest>
@@ -20,33 +20,16 @@
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
-        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-        <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.visibility">visible</option>
-        <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
         <option name="charting.axisY.scale">linear</option>
-        <option name="charting.axisY2.enabled">0</option>
-        <option name="charting.axisY2.scale">inherit</option>
         <option name="charting.chart">pie</option>
-        <option name="charting.chart.bubbleMaximumSize">50</option>
-        <option name="charting.chart.bubbleMinimumSize">10</option>
-        <option name="charting.chart.bubbleSizeBy">area</option>
-        <option name="charting.chart.nullValueMode">gaps</option>
-        <option name="charting.chart.showDataLabels">none</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">all</option>
-        <option name="charting.layout.splitSeries">0</option>
-        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.seriesColors">[0xA5C63B,0xE22A22,0xCCCCCC]</option>
-        <option name="trellis.enabled">0</option>
-        <option name="trellis.scales.shared">1</option>
-        <option name="trellis.size">medium</option>
+        <option name="charting.fieldColors">{"EXPLOITED":0xFF0000,"INEFFECTIVE":0x1799FF,"BLOCKED":0x08E880,"PROBED":0x1554E8}</option>
         <drilldown>
           <link target="contrast_search">search?q=eventtype="contrast_eventtype"  outcome=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
@@ -86,33 +69,14 @@
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
-        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
-        <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.visibility">visible</option>
-        <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.scale">linear</option>
         <option name="charting.axisY.scale">linear</option>
-        <option name="charting.axisY2.enabled">0</option>
-        <option name="charting.axisY2.scale">inherit</option>
         <option name="charting.chart">bar</option>
-        <option name="charting.chart.bubbleMaximumSize">50</option>
-        <option name="charting.chart.bubbleMinimumSize">10</option>
-        <option name="charting.chart.bubbleSizeBy">area</option>
-        <option name="charting.chart.nullValueMode">gaps</option>
-        <option name="charting.chart.showDataLabels">none</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">all</option>
-        <option name="charting.layout.splitSeries">0</option>
-        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
-        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.seriesColors">[0x42BBA3]</option>
-        <option name="trellis.enabled">0</option>
-        <option name="trellis.scales.shared">1</option>
-        <option name="trellis.size">medium</option>
         <drilldown>
           <link target="contrast_search">search?q=eventtype="contrast_eventtype"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
@@ -132,7 +96,7 @@
       </input>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype" pri=* | timechart count by pri | rename _time as "Time"</query>
+          <query>eventtype="contrast_eventtype" pri=* | timechart count by pri</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -160,6 +124,7 @@
         <option name="charting.chart">bar</option>
         <option name="charting.chart.stackMode">default</option>
         <option name="charting.drilldown">all</option>
+        <option name="charting.seriesColors">[0x42BBA3]</option>
         <drilldown>
           <link target="contrast_search">search?q=eventtype="contrast_eventtype" request=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>

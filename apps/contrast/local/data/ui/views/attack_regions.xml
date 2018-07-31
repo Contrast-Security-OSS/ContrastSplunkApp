@@ -55,7 +55,7 @@
         <option name="mapping.tileLayer.minZoom">0</option>
         <option name="mapping.tileLayer.tileOpacity">1</option>
         <option name="mapping.type">marker</option>
-        <option name="mapping.fieldColors">{"EXPLOITED":0xFF0000,"INEFFECTIVE":0xAEAEAE}</option>
+        <option name="mapping.fieldColors">{"EXPLOITED":0xFF0000,"INEFFECTIVE":0x1799FF,"BLOCKED":0x08E880,"PROBED":0x1554E8}</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
