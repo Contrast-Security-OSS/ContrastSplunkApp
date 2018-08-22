@@ -1,6 +1,6 @@
 <form>
-  <label>Attack Dashboard</label>
-  <description>A summary of attacks identified and defended by Contrast Security</description>
+  <label>Attacks by Applications</label>
+  <description>A summary attacks identified and defended filtered by the indicated applications.</description>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="period" searchWhenChanged="true">
       <label>Time range</label>
@@ -9,52 +9,40 @@
         <latest>now</latest>
       </default>
     </input>
+    <input type="multiselect" token="app" searchWhenChanged="true">
+      <label>Application</label>
+      <fieldForLabel>app</fieldForLabel>
+      <fieldForValue>app</fieldForValue>
+      <search>
+        <query>eventtype="contrast_eventtype" | stats values by app</query>
+      </search>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>app="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR </delimiter>
+    </input>
   </fieldset>
   <row>
     <panel>
       <title>Attacks Blocked</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype"  | rename outcome as "Result" | stats count by "Result" | sort "Result"</query>
+          <query>eventtype="contrast_eventtype" $app$  | chart count(outcome) by app, outcome</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="charting.axisX.scale">linear</option>
-        <option name="charting.axisY.scale">linear</option>
-        <option name="charting.chart">pie</option>
-        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.style">shiny</option>
+        <option name="charting.axisY.scale">log</option>
+        <option name="charting.chart">column</option>
         <option name="charting.drilldown">all</option>
-        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.seriesColors">[0xA5C63B,0xE22A22,0xCCCCCC]</option>
         <option name="charting.fieldColors">{"EXPLOITED":0xFF0000,"INEFFECTIVE":0x1799FF,"BLOCKED":0x08E880,"PROBED":0x1554E8}</option>
         <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  outcome=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
-        </drilldown>
-      </chart>
-    </panel>
-    <panel>
-      <title>Attacks by Applications</title>
-      <chart>
-        <search>
-          <query>eventtype="contrast_eventtype"  | rename app as "Application" | stats count by "Application"</query>
-          <earliest>$period.earliest$</earliest>
-          <latest>$period.latest$</latest>
-          <sampleRatio>1</sampleRatio>
-        </search>
-        <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.visibility">visible</option>
-        <option name="charting.axisTitleY2.visibility">visible</option>
-        <option name="charting.chart">pie</option>
-        <option name="charting.chart.stackMode">stacked</option>
-        <option name="charting.drilldown">all</option>
-        <option name="charting.layout.splitSeries">0</option>
-        <option name="charting.legend.placement">right</option>
-        <option name="trellis.enabled">0</option>
-        <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  app=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  app=$click.value$ outcome=$click.name2$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -64,21 +52,20 @@
       <title>Attacks by Type</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype"  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
+          <query>eventtype="contrast_eventtype" $app$  | rename pri as "Attack Type" | stats count by "Attack Type"</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
-        <option name="charting.axisX.scale">linear</option>
-        <option name="charting.axisY.scale">linear</option>
         <option name="charting.chart">bar</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">all</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.seriesColors">[0x42BBA3]</option>
         <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  $app$ pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -96,16 +83,17 @@
       </input>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype" pri=* | timechart count by pri</query>
+          <query>eventtype="contrast_eventtype" $app$ pri=* | timechart count by pri</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
+        <option name="charting.axisY.scale">linear</option>
         <option name="charting.chart">area</option>
         <option name="charting.chart.stackMode">$stackmode$</option>
         <option name="charting.drilldown">all</option>
         <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype"  pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype" $app$ pri=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
@@ -115,7 +103,7 @@
       <title>Top 10 most attacked URIs</title>
       <chart>
         <search>
-          <query>eventtype="contrast_eventtype" | top 10 request | rename count as "Total"</query>
+          <query>eventtype="contrast_eventtype" $app$ | top 10 request</query>
           <earliest>$period.earliest$</earliest>
           <latest>$period.latest$</latest>
         </search>
@@ -126,7 +114,7 @@
         <option name="charting.drilldown">all</option>
         <option name="charting.seriesColors">[0x42BBA3]</option>
         <drilldown>
-          <link target="contrast_search">search?q=eventtype="contrast_eventtype" request=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
+          <link target="contrast_search">search?q=eventtype="contrast_eventtype" $app$ request=$click.value$&amp;earliest=$period.earliest$&amp;latest=$period.latest$</link>
         </drilldown>
       </chart>
     </panel>
