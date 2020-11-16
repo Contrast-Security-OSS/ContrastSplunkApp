@@ -9,7 +9,7 @@ All of this intelligence is streamed directly into Splunk, allowing you to quick
 
  ### 1. Install Contrast Security App
 
- * Download the packaged app from Splunk marketplace or GitHub.
+ * Download the packaged app from [Splunk marketplace](https://splunkbase.splunk.com/app/4140/) or [GitHub](releases).
  * Click the Settings gear icon next to Apps
  * Click install app from file.
 
