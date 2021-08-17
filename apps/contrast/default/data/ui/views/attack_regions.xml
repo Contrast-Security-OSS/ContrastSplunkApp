@@ -1,4 +1,4 @@
-<form>
+<form version="1.1">
   <label>Attack Geographical Distribution</label>
   <description>A geographical view of attack identified and defended by Contrast Security</description>
   <fieldset submitButton="false" autoRun="true">
